@@ -1,0 +1,60 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renovar Inventario de Ingredientes</title>
+</head>
+<main class="main text-center py-4"> 
+<body>
+    {% include '/nav.html'  %}
+    <br><br>
+    {% with messages=get_flashed_messages()%}
+    
+    {% if messages%}
+    <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+       {{ message }}
+    {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% endwith %}
+    <h1 class="text-center text-warning">Renovar Inventario de Ingredientes a 0</h1>
+    <div class="container">
+    <form action="/renovar_inventario" method="POST">
+        <label for="ingrediente_id"><strong>Seleccionar Ingrediente:</strong></label>
+        <select id="ingrediente_id" name="ingrediente_id" required>
+            {% for ingrediente in ingredientes %}
+            <option value="{{ ingrediente.id }}">{{ ingrediente.nombre }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit" class="btn btn-primary">Establecer Inventario a 0</button>
+    </form>
+   </div>
+   <br><br>
+    <h2 class="text-center text-warning">Inventario Actual de Ingredientes</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Calorías</th>
+                <th>Cantidad en Inventario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingrediente in ingredientes %}
+            <tr>
+                <td>{{ ingrediente.nombre }}</td>
+                <td>{{ ingrediente.calorias }}</td>
+                <td>{{ ingrediente.inventario }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</main>
+</html>

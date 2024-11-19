@@ -1,0 +1,47 @@
+<div class="col-md-12">
+    <br>
+           <h1 class="fas fa-users bg-info" id = "usersh1"> Heladeria</h1>
+      </div>
+  </div>
+
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}" aria-current="page"><i class="fa fa-home text-light" aria-hidden="true"></i> Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mostrar_ingredientes') }}"><i class="nav-icon fas fa-book text-light"></i> Ingredientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('ingredientes_categoria') }}"><i class="nav-icon fas fa-book text-light"></i>Clasificacion de los ingredientes </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mostrar_costo_ajustado') }}"><i class="nav-icon fas fa-book text-light"></i> Costo total</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('calcular_calorias') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Calorias</a>
+        </li> 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('calcular_rentabilidad') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Rentabilidad</a>
+        </li> 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mas_rentable') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Producto mas rentable</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('registrar_venta') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Registrar venta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mostrar_ventas') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Mostrar ventas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('producto_mas_vendido') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Producto mas vendido</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('abastecer_inventario') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Abastecer inventario</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('renovar_inventario') }}"><i class="nav-icon fas fa-user-plus text-light"></i> Renovar inventario a 0</a>
+        </li>
+    </ul>
+</nav>

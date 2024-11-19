@@ -1,0 +1,38 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Rentabilidad
+    </title> 
+</head>
+<main class="main text-center py-4"> 
+    <body>
+    {% include '/nav.html'  %}
+    <h1 class="text-center text-warning">Rentabilidad</h1>  
+<body>
+    <div class="container mt-5 table table-dark" >
+        <div class="row mt-4">
+            {% for producto in productos %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        {% if producto %}
+                        <p class="card-text">{{ producto.tipo_vaso }}</p>
+                        {% else %}
+                        <p class="card-text"> - </p>
+                        {% endif %}            
+                        <p class="card-text" style="color: dodgerblue;">Rentabilidad: La rentabilidad es de: ${{ producto.rentabilidad }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</main>
+</html>

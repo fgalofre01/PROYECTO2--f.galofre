@@ -1,0 +1,38 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredientes Clasificados</title>
+</head>
+<main class="main text-center py-4"> 
+<body>
+    {% include '/nav.html'  %}
+    <h1 class="text-center text-warning">Ingredientes Clasificados</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Calorías</th>
+                <th>Vegetariano</th> 
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingrediente in ingredientes %}
+            <tr>
+                <td>{{ ingrediente.nombre }}</td>
+                <td>{{ ingrediente.calorias }}</td>
+                <td>{{ 'Sí' if ingrediente.es_vegetariano else 'No' }}</td>
+                <td class="categoria {{ ingrediente.categoria | replace(' ', '-') }}">
+                    {{ ingrediente.categoria }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</main>
+</html>

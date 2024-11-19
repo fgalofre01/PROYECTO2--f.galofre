@@ -1,0 +1,38 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Producto mas rentable
+    </title> 
+</head>
+<main class="main text-center py-4"> 
+    <body>
+    {% include '/nav.html'  %}
+    <h1 class="text-center text-warning">Producto mas rentable</h1>  
+<body>
+    <div class="container mt-5 table table-dark" style="margin-left: 400px;" >
+        <div class="row mt-4">
+            {% if producto %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.tipo_vaso }}</p>
+                        <p class="card-text">Precio: ${{ producto.precio }}</p>
+                        <p class="card-text"> Costo Total: ${{ producto.costo_total }}</p>    
+                        <p class="card-text" style="color: dodgerblue;">Rentabilidad: {{ producto.rentabilidad }}</p>
+                    </div>
+                    {% else %}
+                    <p class="card-text">No hay productos disponibles.</p>
+                    {% endif %}
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</body>
+</html>

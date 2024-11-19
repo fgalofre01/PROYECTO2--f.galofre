@@ -1,0 +1,45 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Registrar venta
+      </title> 
+</head>
+<main class="main text-center py-4"> 
+<body>
+    {% include '/nav.html'  %}
+    <br><br>
+{% with messages=get_flashed_messages()%}
+
+{% if messages%}
+<div class="alert alert-success" role="alert">
+{% for message in messages %}
+   {{ message }}
+{% endfor %}
+</div>
+{% endif %}
+
+{% endwith %}
+    <h1 class="text-center text-warning">Registrar Venta</h1>
+    <div class="container">
+        <form action="/registrar_venta" method="POST">
+            <label for="producto"><strong>Seleccione un producto:</strong></label>
+            <select id="producto" name="producto_id" required>
+                {% for producto in productos %}
+                <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="cantidad"><strong>Cantidad:</strong></label>
+            <input type="number" id="cantidad" name="cantidad" min="1" value="1" required>
+            <br><br>
+            <button type="submit" class="btn btn-success">Registrar Venta</button>
+        </form>
+    </div>
+</body>
+</main>
+</html>

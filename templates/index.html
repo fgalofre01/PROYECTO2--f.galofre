@@ -1,0 +1,50 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Menú de la Heladería
+    </title> 
+</head>
+<main class="main text-center py-4"> 
+    <body>
+    {% include '/nav.html'  %}
+    <h1 class="text-center text-warning">Menú de la Heladería</h1>
+          <div class="container mt-5 table table-dark" >
+             
+              <div class="row mt-4">
+                  {% for producto in productos %}
+                  <div class="col-md-3">
+                      <div class="card">
+                          <div class="card-body">
+                              <h5 class="card-title">{{ producto.nombre }}</h5>
+                              {% if producto %}
+                              <p class="card-text">{{ producto.tipo_vaso }}</p>
+                              {% else %}
+                              <p class="card-text"> - </p>
+                              {% endif %}  
+                              <p class="card-text"><strong>Precio: ${{ producto.precio_publico }}</strong></p>
+                              <h6 class="card-title" style="color: dodgerblue;">Ingredientes</h6>
+                              <ul>
+                                  <li> {{ producto.ingrediente1.nombre if producto.ingrediente1 }}</li>
+                                  <li> {{ producto.ingrediente2.nombre if producto.ingrediente2 }}</li>
+                                  <li> {{ producto.ingrediente3.nombre if producto.ingrediente3 }}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </body>
+      </html>
+
+</body>
+
+</main>
+
+</html>
+ 

@@ -1,0 +1,46 @@
+{% include '/scripts.html'  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto Más Vendido</title> 
+</head>
+<main class="main text-center py-4">    
+<body>
+    {% include '/nav.html'  %}
+    <br><br>
+    {% with messages=get_flashed_messages()%}
+    
+    {% if messages%}
+    <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+       {{ message }}
+    {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% endwith %}
+    <div class="container">
+        <h1 class="text-center text-warning">Producto Más Vendido</h1>
+        <div class="container mt-5 table table-dark" style="margin-left: 400px;" >
+            <div class="row mt-4">
+        {% if producto %}
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+            <h5 class="card-title"><strong>Nombre:</strong> {{ producto.nombre }}</h5>
+            <p><strong>Precio:</strong> ${{ producto.precio_publico }}</p>
+            <p class="card-text" style="color: dodgerblue;"><strong>Ventas Totales:</strong> {{ producto.ventas_totales }}</p>
+        {% else %}
+            <p>No hay ventas registradas aún.</p>
+        </div>
+    </div>
+</div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</main>
+</html>
