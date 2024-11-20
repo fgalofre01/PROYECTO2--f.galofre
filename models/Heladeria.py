@@ -1,9 +1,8 @@
-from models.Ingredientes import Ingrediente
-from models.Productos import Producto
+from models.Ventas import Venta
+from utils import db
 
 class Heladeria():
     def __init__(self):
-        self.inventario = {}
         self.productos = []
         self.ingredientes = []
     
@@ -13,4 +12,21 @@ class Heladeria():
     def obtener_ingredientes(self):
         return self.ingredientes
     
-    
+    def vender(self, producto):
+        """
+        Vende un producto, verificando si hay suficiente inventario de ingredientes.
+        """
+        for ingrediente in producto.ingredientes:
+            if ingrediente.inventario < 1:
+                raise ValueError(ingrediente.nombre)  # Lanzar error si no hay suficiente inventario
+
+        # Reducir el inventario de los ingredientes del producto
+        for ingrediente in producto.ingredientes:
+            ingrediente.inventario -= 1
+        
+       # Registrar venta en la tabla Ventas
+        nueva_venta = Venta(producto_id=producto.id)
+        db.session.add(nueva_venta)
+        db.session.commit()
+
+        return "¡Vendido!"

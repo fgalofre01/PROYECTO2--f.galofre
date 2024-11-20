@@ -139,6 +139,10 @@ def principal_routes(app):
 
         # Registrar la venta en la base de datos
         producto = Producto.query.get(producto_id)
+        if not producto:
+            flash("Producto no encontrado.", "error")
+            return redirect(url_for('mostrar_registro_venta'))
+
         if producto:
             nueva_venta = Venta(producto_id=producto.id, cantidad=cantidad)
             db.session.add(nueva_venta)
@@ -226,3 +230,50 @@ def principal_routes(app):
         
         ingredientes = Ingrediente.query.all()
         return render_template('renovar_inventario.html', ingredientes=ingredientes)
+
+    @app.route('/vender/<int:producto_id>', methods=['POST'])
+    def vender_producto(producto_id):
+        # Obtener el producto desde la lista de productos (simulación)
+        producto = next((p for p in heladeria.productos if p.id == producto_id), None)
+        
+        if not producto:
+            flash("Producto no encontrado.", "error")
+            return redirect(url_for('vender_productos'))
+        else:
+            try:
+                # Intentar vender el producto
+                mensaje = heladeria.vender(producto)
+                flash(mensaje, "success")
+            except ValueError as e:
+                # Capturar el error y mostrar el mensaje personalizado
+                flash(f"¡Oh no! Nos hemos quedado sin {str(e)}", "error")
+
+        return redirect(url_for('vender_productos'))   
+
+    @app.route('/vender_producto', methods=['GET', 'POST'])
+    def vender_productos():
+        productos = Producto.query.limit(4).all()
+        ventas = Venta.query.all()
+        return render_template('vender_producto.html', productos=productos, ventas=ventas, mensaje=None)
+
+    
+
+    @app.route('/registrar_ventas/<int:producto_id>', methods=['POST'])
+    def registrar_ventas(producto_id):
+        # Buscar el producto
+        productos = Producto.query.limit(4).all()
+        producto = next((p for p in heladeria.productos if p.id == producto_id), None)
+
+        if not producto:
+            return render_template('vender_producto.html', productos=heladeria.productos, mensaje="Producto no encontrado.")
+
+        try:
+            # Intentar registrar la venta
+            mensaje = heladeria.vender(producto)
+        except ValueError as e:
+            # Capturar error si falta ingrediente
+            mensaje = f"¡Oh no! Nos hemos quedado sin {str(e)}."
+
+        # Renderizar el resultado
+        return render_template('vender_producto.html', mensaje=mensaje)
+

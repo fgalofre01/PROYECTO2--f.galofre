@@ -1,5 +1,6 @@
 from utils.db import db
 
+
 class Ingrediente(db.Model):
     
     __tablename__ = 'ingredientes'
@@ -12,7 +13,7 @@ class Ingrediente(db.Model):
     es_vegetariano = db.Column(db.Boolean)
     sabor = db.Column(db.String(100))   
     
-    def __init__(self, nombre: str, precio: float, calorias: float, inventario: int, es_vegetariano: int, sabor: str):
+    def __init__(self, nombre: str, precio: float, calorias: float, inventario: int, es_vegetariano: bool, sabor: str):
         self._nombre = nombre
         self._precio = precio
         self._calorias = calorias
@@ -20,7 +21,10 @@ class Ingrediente(db.Model):
         self._es_vegetariano = es_vegetariano
         self._sabor = sabor
         
-    
-    
+    def es_sano(self):
+        """
+        Un ingrediente es sano si tiene menos de 100 calorías y es vegetariano.
+        """
+        return self.calorias < 100 and self.es_vegetariano
    
    
