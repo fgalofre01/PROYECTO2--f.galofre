@@ -73,3 +73,9 @@ class Producto(db.Model):
         Calcula las calorías totales del producto sumando las calorías de cada ingrediente.
         """
         return sum(ingrediente._calorias for ingrediente in self._ingredientes)
+   
+    def calcular_costo_produccion(self):
+        """
+        Calcula el costo total de producción sumando los costos de cada ingrediente.
+        """
+        return sum(ingrediente._precio for ingrediente in self._ingredientes)
